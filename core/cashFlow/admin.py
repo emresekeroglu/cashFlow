@@ -1,3 +1,8 @@
 from django.contrib import admin
+from .models import AccountBox
 
-# Register your models here.
+class AccountBoxAdmin(admin.ModelAdmin):
+  list_display = ('accountName','accountAmount')
+  
+  
+admin.site.register(AccountBox,AccountBoxAdmin)
