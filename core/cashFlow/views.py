@@ -1,4 +1,7 @@
 from django.shortcuts import render
+from django.http.response import HttpResponse
+from .models import AccountBox
 
 def index(request):
-  return render(request, 'index.html')
+  accountsData = AccountBox.objects.all()
+  return render(request, 'index.html', {'data': accountsData})

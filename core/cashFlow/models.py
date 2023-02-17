@@ -4,6 +4,8 @@ from django.db import models
 class AccountBox(models.Model):
     accountName = models.CharField("Hesap Adı", max_length=250, blank=True, null=True)
     accountAmount = models.DecimalField("Toplam Tutar", max_digits=10, decimal_places=2)
+    accountImge = models.ImageField("Banka Görseli", null=True, blank=True, upload_to="images/")
+    accountStatus = models.BooleanField("Aktif Mi?", null=False, default=True)
 
     class Meta:
         verbose_name = "Hesap Adı"
