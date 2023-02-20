@@ -43,8 +43,12 @@ class Customer(models.Model):
 
 
 class AccountAction(models.Model):
-    CustomerTitle = models.ForeignKey(Customer, verbose_name = 'Firma Adı', on_delete=models.CASCADE)
-    accountName = models.ForeignKey(AccountBox, verbose_name = 'Hesap Adı', on_delete=models.CASCADE)
+    CustomerTitle = models.ForeignKey(
+        Customer, verbose_name="Firma Adı", on_delete=models.CASCADE
+    )
+    accountName = models.ForeignKey(
+        AccountBox, verbose_name="Hesap Adı", on_delete=models.CASCADE
+    )
     InFlow = "GİRİŞ"
     OutFlow = "ÇIKIŞ"
     IN_OUT_FLOW_CHOICES = [
@@ -63,7 +67,18 @@ class AccountAction(models.Model):
     def __str__(self):
         return f"{self.accountName}"
 
-'''
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if self.in_out_flow == "ÇIKIŞ":
+            process = AccountBox.objects.get(account=self.accountName)
+        print(self.accountName)
+        print(self.CustomerTitle)
+        print(self.in_out_flow)
+        print(self.amount)
+
+
+"""
+    # this block for ManyToManyField List Display And Set Verbos Name
     def get_accounts(self):
         return "\n".join([a.accountName for a in self.accountName.all()])
 
@@ -73,4 +88,4 @@ class AccountAction(models.Model):
         return "\n".join([c.CustomerTitle for c in self.CustomerTitle.all()])
 
     get_customers.short_description = "Firma Adı"
-'''
+"""
