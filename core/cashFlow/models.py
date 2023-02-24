@@ -69,12 +69,17 @@ class AccountAction(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
+        getAccountDetail = AccountBox.objects.filter(accountName=self.accountName)
         if self.in_out_flow == "ÇIKIŞ":
-            process = AccountBox.objects.get(account=self.accountName)
-        print(self.accountName)
-        print(self.CustomerTitle)
-        print(self.in_out_flow)
-        print(self.amount)
+            for i in getAccountDetail:
+                AccountBox.objects.filter(accountName=i.accountName).update(
+                    accountAmount=(i.accountAmount - self.amount)
+                )
+        else:
+            for i in getAccountDetail:
+                AccountBox.objects.filter(accountName=i.accountName).update(
+                    accountAmount=(i.accountAmount + self.amount)
+                )
 
 
 """
