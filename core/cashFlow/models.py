@@ -24,7 +24,7 @@ class AccountBox(models.Model):
 
 class Customer(models.Model):
     CustomerTitle = models.CharField(
-        "Firma Ünvanı", max_length=255, null=False, blank=False, default="empty value"
+        "Firma Ünvanı", max_length=255, null=False, blank=False, default="Firma Seçiniz"
     )
     CustomerCode = models.CharField(
         "Cari Kodu", max_length=255, null=False, blank=False
