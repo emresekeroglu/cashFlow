@@ -4,7 +4,7 @@
   <div class="row align-items-start">
     {% for account in data %} {% if account.accountStatus == True %}
     <div class="col mt-3">
-      <div class="card" style="width: 14rem">
+      <div class="card border-0 shadow p-3 mb-5" style="width: 14rem">
         <img
           src="{{ account.accountImge.url }}"
           class="card-img-top"
@@ -25,7 +25,6 @@
 </div>
 
 <div class="container mt-5">
-  <hr class="hr hr-blurry">
   <div class="alert alert-info" role="alert">
     <h4 class="alert-heading">Hesap Hareketleri</h4>
   </div>
