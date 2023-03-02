@@ -59,6 +59,8 @@ class AccountAction(models.Model):
         "Giriş/Çıkış", max_length=5, choices=IN_OUT_FLOW_CHOICES, default=InFlow
     )
     amount = models.DecimalField("Tutar", max_digits=20, decimal_places=2)
+    created_at = models.DateTimeField("Kayıt Tarihi", auto_now_add=True)
+    updated_at = models.DateTimeField("Güncelleme Tarihi", auto_now=True)
 
     class Meta:
         verbose_name = "Hesap Hareketi"

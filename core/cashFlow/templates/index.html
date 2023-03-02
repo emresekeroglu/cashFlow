@@ -1,24 +1,65 @@
-{% extends "base.html" %}
-{% load static %}
-
-{% block content %}
+{% extends "base.html" %} {% load static %} {% block content %}
 
 <div class="container mt-4">
   <div class="row align-items-start">
-    {% for account in data %}
-    {% if account.accountStatus == True %}
+    {% for account in data %} {% if account.accountStatus == True %}
     <div class="col mt-3">
-      <div class="card" style="width: 14rem;">
-        <img src="{{ account.accountImge.url }}" class="card-img-top" alt="...">
+      <div class="card" style="width: 14rem">
+        <img
+          src="{{ account.accountImge.url }}"
+          class="card-img-top"
+          alt="..."
+        />
         <div class="card-body">
           <h5 class="card-title text-center">Toplam Kalan Tutar</h5>
-          <span class="badge rounded-pill text-bg-secondary text-center px-5" style="font-size:14px">{{ account.accountAmount }}</span>
+          <span
+            class="badge rounded-pill text-bg-secondary text-center px-5"
+            style="font-size: 14px"
+            >{{ account.accountAmount }}</span
+          >
         </div>
       </div>
     </div>
-    {% endif %}
-    {% endfor %}
+    {% endif %} {% endfor %}
   </div>
 </div>
 
+<div class="container mt-5">
+  <hr class="hr hr-blurry">
+  <div class="alert alert-info" role="alert">
+    <h4 class="alert-heading">Hesap Hareketleri</h4>
+  </div>
+  <table class="table table-bordered" id="inoutTable">
+    <thead class="table-primary">
+      <tr>
+        <th scope="col">Firma Ünvanı</th>
+        <th scope="col">Hesap Adı</th>
+        <th scope="col">İşlem</th>
+        <th scope="col" tabindex="0" aria-controls="#inoutTable">Tutar</th>
+        <th scope="col">Kayıt Tarihi</th>
+        <th scope="col">Güncelleme Tarihi</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in actionData %} 
+      {% if i.in_out_flow == 'GİRİŞ' %}
+      <tr class="table-success">
+        {% else %}
+      <tr class="table-danger">
+        {% endif %}
+        <th scope="row">{{i.CustomerTitle}}</th>
+        <td>{{i.accountName}}</td>
+        <td>{{i.in_out_flow}}</td>
+        <td>{{i.amount}}</td>
+        <td>{{i.created_at}}</td>
+        {% if i.updated_at|date:'Y-m-d H:i:s' == i.created_at|date:'Y-m-d H:i:s' %}
+        <td></td>
+        {% else %}
+        <td>{{i.updated_at}}</td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 {% endblock %}
