@@ -11,7 +11,7 @@ class CustomerAdmin(admin.ModelAdmin):
   
 class AccountActionAdmin(admin.ModelAdmin):
   autocomplete_fields = ['accountName','CustomerTitle']
-  list_display = ('CustomerTitle','accountName','in_out_flow','amount')
+  list_display = ('CustomerTitle','accountName','in_out_flow','amount','description')
   
   
 admin.site.register(AccountBox,AccountBoxAdmin)
