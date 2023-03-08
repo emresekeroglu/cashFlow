@@ -1,26 +1,24 @@
-{% extends "base.html" %} {% load static %} {% block content %}
+{% extends "base.html" %} 
+{% load static %} 
+{% block content %}
 
 <div class="container mt-4">
   <div class="row align-items-start">
-    {% for account in data %} {% if account.accountStatus == True %}
-    <div class="col mt-3">
+    {% for account in data %}
+    {% if account.accountStatus == True %}
+    <div class="col mt-3 col-auto">
       <div class="card border-0 shadow p-3 mb-5" style="width: 14rem">
-        <img
-          src="{{ account.accountImge.url }}"
-          class="card-img-top"
-          alt="..."
-        />
+        <img src="{{ account.accountImge.url }}" class="card-img-top" alt="..." />
         <div class="card-body text-center">
           <h6 class="card-title text-center">Toplam Kalan Tutar</h6>
-          <span
-            class="badge rounded-pill text-bg-secondary text-center px-6"
-            style="font-size: 14px"
-            >{{ account.accountAmount }}</span
-          >
+          <span class="badge rounded-pill text-bg-secondary text-center px-6" style="font-size: 14px">
+            {{ account.accountAmount }}
+          </span>
         </div>
       </div>
     </div>
-    {% endif %} {% endfor %}
+    {% endif %} 
+    {% endfor %}
   </div>
 </div>
 
@@ -35,6 +33,7 @@
         <th scope="col">Hesap Adı</th>
         <th scope="col">İşlem</th>
         <th scope="col" tabindex="0" aria-controls="#inoutTable">Tutar</th>
+        <th scope="col">Açıklama</th>
         <th scope="col">Kayıt Tarihi</th>
         <th scope="col">Güncelleme Tarihi</th>
       </tr>
@@ -50,6 +49,7 @@
         <td>{{i.accountName}}</td>
         <td>{{i.in_out_flow}}</td>
         <td>{{i.amount}}</td>
+        <td>{{i.description|default_if_none:" "}}</td>
         <td>{{i.created_at}}</td>
         {% if i.updated_at|date:'Y-m-d H:i:s' == i.created_at|date:'Y-m-d H:i:s' %}
         <td></td>
