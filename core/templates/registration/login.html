@@ -1,0 +1,52 @@
+{% extends "base.html" %} 
+{% load static %} 
+
+{% block content %}
+
+  {% if form.errors %}
+  <div class="">
+    <p>Parola veya Kullanıcı Adı Hatalı. Lütfen Tekrar Deneyiniz!</p>
+  </div>
+  {% endif %}
+
+  <!-- {% if next %}
+    {% if user.is_authenticated %}
+      <p>Your account doesn't have access to this page. To proceed,
+      please login with an account that has access.</p>
+    {% else %}
+      <p>Please login to see this page.</p>
+    {% endif %}
+  {% endif %} -->
+
+<div class="d-flex justify-content-center align-items-center" style="margin-top:100px; margin-bottom:150px;">
+  <div class="container">
+    <div class="row d-flex justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6">
+        <div class="border border-3 border-primary"></div>
+        <div class="card bg-white shadow-lg">
+          <div class="card-body p-5">
+            <form class="mb-3 mt-md-4" method="post" action="{% url 'login' %}">
+              {% csrf_token %}
+              <h2 class="fw-bold mb-2 text-uppercase ">Cash Flow</h2>
+              <p class=" mb-5">Nakit Akış Takip Sistemi</p>
+              <div class="mb-3">
+                <label for="id_username" class="form-label ">Kullanıcı Adı</label>
+                <input type="text" class="form-control" name="username" id="id_username" placeholder="Kullanıcıadı Giriniz">
+              </div>
+              <div class="mb-3">
+                <label for="id_password" class="form-label ">Parola</label>
+                <input type="password" class="form-control" name="password" id="id_password" placeholder="*******">
+              </div>
+              <div class="d-grid">
+                <button class="btn btn-outline-primary" type="submit">Giriş</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
