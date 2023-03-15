@@ -24,21 +24,22 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-b9hpqu=@f@f*$f+eyw^lq!8(x1y4ox$*uk%5p%g=pf@m90=&6_"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['192.168.10.21','127.0.0.1']
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    "cashFlow",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "cashFlow",
+    "members",
 ]
 
 MIDDLEWARE = [
@@ -137,5 +138,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-LOGIN_REDIRECT_URL = '/'
-LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
+LOGIN_URL = 'members/login_user'

@@ -7,11 +7,11 @@ from django.views.static import serve
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('cashFlow.urls')),
-    path('accounts/', include('django.contrib.auth.urls')),
+    path('members/', include('django.contrib.auth.urls')),
+    path('members/', include('members.urls')),
     re_path(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
     re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
 ]
-
 admin.site.site_header = "Cash Flow System"
 admin.site.site_title = "Cash Flow"
 admin.site.index_title = "Welcome To Cash Flow Administrator"

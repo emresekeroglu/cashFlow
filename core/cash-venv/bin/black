@@ -1,4 +1,4 @@
-#!/Users/emresekeroglu/Desktop/cashFlow/core/cash-venv/bin/python3.11
+#!/home/emre/Desktop/cashFlow/core/cash-venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys

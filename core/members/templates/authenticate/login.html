@@ -1,22 +1,22 @@
 {% extends "base.html" %} 
 {% load static %} 
-
+{% block js_files %}
+{% endblock %}
 {% block content %}
 
-  {% if form.errors %}
-  <div class="">
-    <p>Parola veya Kullanıcı Adı Hatalı. Lütfen Tekrar Deneyiniz!</p>
-  </div>
+{% if messages %}
+<div class="container text-center mt-5">
+  {% for message in messages %}
+  {% if message.tags == 'error' %}
+  <div class="col-md-6 mx-auto alert alert-danger shadow-lg" role="alert">
+  {% else %}
+  <div class="col-md-6 mx-auto alert alert-{{message.tags}} shadow-lg" role="alert">
   {% endif %}
-
-  <!-- {% if next %}
-    {% if user.is_authenticated %}
-      <p>Your account doesn't have access to this page. To proceed,
-      please login with an account that has access.</p>
-    {% else %}
-      <p>Please login to see this page.</p>
-    {% endif %}
-  {% endif %} -->
+    <h6>{{ message }}</h6>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
 
 <div class="d-flex justify-content-center align-items-center" style="margin-top:100px; margin-bottom:150px;">
   <div class="container">
@@ -25,17 +25,19 @@
         <div class="border border-3 border-primary"></div>
         <div class="card bg-white shadow-lg">
           <div class="card-body p-5">
-            <form class="mb-3 mt-md-4" method="post" action="{% url 'login' %}">
+            <form class="mb-3 mt-md-4" method="post" action="{% url 'login' %}" id="loginform"> 
               {% csrf_token %}
               <h2 class="fw-bold mb-2 text-uppercase ">Cash Flow</h2>
               <p class=" mb-5">Nakit Akış Takip Sistemi</p>
               <div class="mb-3">
                 <label for="id_username" class="form-label ">Kullanıcı Adı</label>
-                <input type="text" class="form-control" name="username" id="id_username" placeholder="Kullanıcıadı Giriniz">
+                <input type="text" class="form-control" name="username" id="id_username" placeholder="Kullanıcıadı Giriniz" required>
               </div>
               <div class="mb-3">
                 <label for="id_password" class="form-label ">Parola</label>
-                <input type="password" class="form-control" name="password" id="id_password" placeholder="*******">
+                <input type="password" class="form-control" name="password" id="id_password" placeholder="*******" required>
+              </div>
+              <div class="mb-3 g-recaptcha" name="captcha_field">
               </div>
               <div class="d-grid">
                 <button class="btn btn-outline-primary" type="submit">Giriş</button>
@@ -47,6 +49,4 @@
     </div>
   </div>
 </div>
-
-
 {% endblock %}
