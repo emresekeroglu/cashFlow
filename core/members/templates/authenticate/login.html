@@ -1,6 +1,7 @@
 {% extends "base.html" %} 
 {% load static %} 
 {% block js_files %}
+<script src="https://www.google.com/recaptcha/api.js"></script>
 {% endblock %}
 {% block content %}
 
@@ -8,9 +9,10 @@
 <div class="container text-center mt-5">
   {% for message in messages %}
   {% if message.tags == 'error' %}
-  <div class="col-md-6 mx-auto alert alert-danger shadow-lg" role="alert">
-  {% else %}
-  <div class="col-md-6 mx-auto alert alert-{{message.tags}} shadow-lg" role="alert">
+    <div class="col-md-6 mx-auto alert alert-danger shadow-lg" role="alert">
+  {% endif %}
+  {% if message.tags == 'success' %}
+    <div class="col-md-6 mx-auto alert alert-{{message.tags}} shadow-lg" role="alert">
   {% endif %}
     <h6>{{ message }}</h6>
   </div>
@@ -37,7 +39,9 @@
                 <label for="id_password" class="form-label ">Parola</label>
                 <input type="password" class="form-control" name="password" id="id_password" placeholder="*******" required>
               </div>
-              <div class="mb-3 g-recaptcha" name="captcha_field">
+              <div class="mb-3">
+                {{ form.context }}
+                <div class="g-recaptcha" data-sitekey="6LeqwgIlAAAAAPUQwY-wdQwDCFv2vVZxgsMwuVNI"></div>
               </div>
               <div class="d-grid">
                 <button class="btn btn-outline-primary" type="submit">Giriş</button>
